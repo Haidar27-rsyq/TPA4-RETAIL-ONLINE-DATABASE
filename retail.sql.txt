@@ -1,0 +1,159 @@
+--membuat database--
+
+CREATE DATABASE TPA4;
+
+--membuat tabel--
+
+CREATE TABLE barang (
+    id_barang            VARCHAR2(20) NOT NULL,
+    nama_barang          VARCHAR2(20) NOT NULL,
+    harga                INTEGER NOT NULL,
+    stok                 INTEGER NOT NULL,
+    supplier_id_supplier VARCHAR2(20) NOT NULL
+);
+ALTER TABLE barang ADD CONSTRAINT barang_pk PRIMARY KEY ( id_barang );
+
+CREATE TABLE pembayaran (
+    id_pembayaran          VARCHAR2(20) NOT NULL,
+    tgl_bayar              TIMESTAMP NOT NULL,
+    total_bayar            INTEGER NOT NULL,
+    transaksi_id_transaksi VARCHAR2(20) NOT NULL
+);
+ALTER TABLE pembayaran ADD CONSTRAINT pembayaran_pk PRIMARY KEY ( id_pembayaran );
+
+
+CREATE TABLE pembeli (
+    id_pembeli   VARCHAR2(20) NOT NULL,
+    nama_pembeli VARCHAR2(30) NOT NULL,
+    jk           CHAR(1) NOT NULL,
+    no_hp        CHAR(13) NOT NULL,
+    alamat       VARCHAR2(100) NOT NULL
+);
+ALTER TABLE pembeli ADD CONSTRAINT pembeli_pk PRIMARY KEY ( id_pembeli );
+
+CREATE TABLE supplier (
+    id_supplier   VARCHAR2(20) NOT NULL,
+    nama_supplier VARCHAR2(30) NOT NULL,
+    no_hp         CHAR(13) NOT NULL,
+    alamat        VARCHAR2(100) NOT NULL
+);
+ALTER TABLE supplier ADD CONSTRAINT supplier_pk PRIMARY KEY ( id_supplier );
+
+CREATE TABLE transaksi (
+    id_transaksi       VARCHAR2(20) NOT NULL,
+    tanggal            TIMESTAMP NOT NULL,
+    keterangan         VARCHAR2(100) NOT NULL,
+    barang_id_barang   VARCHAR2(20) NOT NULL,
+    pembeli_id_pembeli VARCHAR2(20) NOT NULL
+);
+ALTER TABLE transaksi ADD CONSTRAINT transaksi_pk PRIMARY KEY ( id_transaksi );
+
+--menambahkan data dalam tabel barang--
+alter table barang add stokbarang int;
+
+
+--mengisi data ke tabel--
+
+INSERT INTO BARANG VALUES ('B01', 'Sabun', '5000', '10000', 'TK01');
+INSERT INTO BARANG VALUES ('B02', 'Sampo', '5000', '10000', 'TK02');
+INSERT INTO BARANG VALUES ('B03', 'Sikat gigi', '8000', '10000', 'TK03');
+INSERT INTO BARANG VALUES ('B04', 'Parfum', '10000', '10000', 'TK04');
+INSERT INTO BARANG VALUES ('B05', 'Deterjen', '11000', '10000', 'TK05');
+INSERT INTO BARANG VALUES ('B06', 'Sapu', '9000', '10000', 'TK06');
+INSERT INTO BARANG VALUES ('B07', 'Pel', '10000', '10000', 'TK07');
+INSERT INTO BARANG VALUES ('B08', 'Cungkir', '5000', '10000', 'TK08');
+INSERT INTO BARANG VALUES ('B09', 'Gayung', '6000', '10000', 'TK09');
+INSERT INTO BARANG VALUES ('B10', 'Bak mandi', '50000', '10000', 'TK10');
+
+
+INSERT INTO SUPPLIER VALUES ('TK01', 'Toko Aisyah', '081243567812', 'Jl. Kaligangsa');
+INSERT INTO SUPPLIER VALUES ('TK02', 'Toko Saerah', '082131466717', 'Jl. Raya Brebes');
+INSERT INTO SUPPLIER VALUES ('TK03', 'Toko Bangjo', '086132537831', 'Jl. Raya Gringsing');
+INSERT INTO SUPPLIER VALUES ('TK04', 'Toko Wagu', '088123647131', 'Jl. Kalikangkung');
+INSERT INTO SUPPLIER VALUES ('TK05', 'Toko Ijo', '084153641234', 'Jl. Kendal');
+INSERT INTO SUPPLIER VALUES ('TK06', 'Toko Grosir', '082135467890', 'Jl. Kalimantan');
+INSERT INTO SUPPLIER VALUES ('TK07', 'Toko Alfatut', '085124351236', 'Jl. Papua');
+INSERT INTO SUPPLIER VALUES ('TK08', 'Toko Indoremi', '081256361274', 'Jl. Jambi');
+INSERT INTO SUPPLIER VALUES ('TK09', 'Toko HR', '081738414487', 'Jl. Bengkulu');
+INSERT INTO SUPPLIER VALUES ('TK10', 'Toko Hu', '081244314516', 'Jl. Tegal');
+
+
+INSERT INTO PEMBELI VALUES ('PL01', 'Haidar', 'L', '085171027499', 'Kaligangsa Wetan');
+INSERT INTO PEMBELI VALUES ('PL02', 'Rasyiq', 'L', '081226401336', 'Kaligangsa Kulon');
+INSERT INTO PEMBELI VALUES ('PL03', 'Okta', 'P', '085712647812', 'Bandung');
+INSERT INTO PEMBELI VALUES ('PL04', 'Fini', 'P', '082132435614', 'Kalideres');
+INSERT INTO PEMBELI VALUES ('PL05', 'Diyarizki', 'P', '086731748174', 'Kebayoran lama');
+INSERT INTO PEMBELI VALUES ('PL06', 'Rama', 'L', '086213516413', 'Pesantunan');
+INSERT INTO PEMBELI VALUES ('PL07', 'Nauval', 'L', '085839184918', 'Pesantunan');
+INSERT INTO PEMBELI VALUES ('PL08', 'Syifa', 'L', '084215361564', 'Pesantunan');
+INSERT INTO PEMBELI VALUES ('PL09', 'Fani', 'P', '082163156414', 'Kaliurang');
+INSERT INTO PEMBELI VALUES ('PL10', 'Dina', 'P', '085738184187', 'Jatibarang');
+
+INSERT INTO TRANSAKSI VALUES ('TS01', '01/01/2022', 'Lunas', 'B01', 'PL01');
+INSERT INTO TRANSAKSI VALUES ('TS02', '01/02/2022', 'Lunas', 'B02', 'PL02');
+INSERT INTO TRANSAKSI VALUES ('TS03', '01/03/2022', 'Lunas', 'B03', 'PL03');
+INSERT INTO TRANSAKSI VALUES ('TS04', '01/04/2022', 'Lunas', 'B04', 'PL04');
+INSERT INTO TRANSAKSI VALUES ('TS05', '01/05/2022', 'Lunas', 'B05', 'PL05');
+INSERT INTO TRANSAKSI VALUES ('TS06', '01/06/2022', 'Lunas', 'B06', 'PL06');
+INSERT INTO TRANSAKSI VALUES ('TS07', '01/07/2022', 'Lunas', 'B07', 'PL07');
+INSERT INTO TRANSAKSI VALUES ('TS08', '01/08/2022', 'Lunas', 'B08', 'PL08');
+INSERT INTO TRANSAKSI VALUES ('TS09', '01/09/2022', 'Lunas', 'B09', 'PL09');
+INSERT INTO TRANSAKSI VALUES ('TS10', '01/10/2022', 'Lunas', 'B10', 'PL10');
+
+INSERT INTO PEMBAYARAN VALUES ('BY01', '01/01/2022', '2000000', 'TS01');
+INSERT INTO PEMBAYARAN VALUES ('BY02', '01/02/2022', '2500000', 'TS02');
+INSERT INTO PEMBAYARAN VALUES ('BY03', '01/03/2022', '1500000', 'TS03');
+INSERT INTO PEMBAYARAN VALUES ('BY04', '01/04/2022', '3000000', 'TS04');
+INSERT INTO PEMBAYARAN VALUES ('BY05', '01/05/2022', '2000000', 'TS05');
+INSERT INTO PEMBAYARAN VALUES ('BY06', '01/06/2022', '2000000', 'TS06');
+INSERT INTO PEMBAYARAN VALUES ('BY07', '01/07/2022', '3500000', 'TS07');
+INSERT INTO PEMBAYARAN VALUES ('BY08', '01/08/2022', '2400000', 'TS08');
+INSERT INTO PEMBAYARAN VALUES ('BY09', '01/09/2022', '2000000', 'TS09');
+INSERT INTO PEMBAYARAN VALUES ('BY10', '01/10/2022', '2000000', 'TS10');
+
+-- mengambil data dan melihat data --
+use tpa4;
+select * from barang;
+select * from supplier;
+select * from pembeli;
+select * from transaksi;
+select * from pembayaran;
+select nama_barang from barang;
+select * from transaksi where id_pembeli=4;
+select id_transaksi,id_barang,id_pembeli,nama_barang,jumlahbarang from transaksi left join barang on transaksi.id_barang = barang.id_barang;
+desc pembeli;
+
+-- menghapus tabel --
+drop table barang;
+drop table supplier;
+drop table pembeli;
+drop table transaksi;
+drop table pembayaran;
+
+-- menghapus data pada tabel --
+delete from pembeli where id=PL05;
+delete from supplier where nama_supplier='Toko Aisyah';
+
+-- update data --
+update barang set nama_barang="Sunligt" where id_barang=B01;
+
+-- kasus --
+-- 1 pelanggan membeli 3 barang berbeda --
+INSERT INTO TRANSAKSI VALUES ('TS01', '01/01/2022', 'Lunas', 'B01', 'PL01');
+INSERT INTO TRANSAKSI VALUES ('TS02', '01/02/2022', 'Lunas', 'B02', 'PL01');
+INSERT INTO TRANSAKSI VALUES ('TS03', '01/03/2022', 'Lunas', 'B03', 'PL01');
+
+-- melihat beberapa produk yang paling sering dibeli --
+select nama_barang,(count(jumlahbarang)) as "Laris" from transaksi
+left join barang on transaksi.id_barang=barang.id_barang group by id_barang
+order by count(id_produk) desc limit 5;
+
+-- melihat kategori produk yang paling banyak produk nya --
+select id_barang,count(id_barang) as "jumlah produk" from produk group by id_barang
+order by count(id_barang) desc;
+
+-- rata-rata transaksi yang dilakukan pembeli dalam 1 bulan terakhir --
+select count(id_transaksi) as "Jumlah transaksi dalam 1 bulan",avg(keterangan) as "rata-rata transaksi"
+from transaksi where tanggal between "01/01/2022" and "01/02/2022";
+
+
